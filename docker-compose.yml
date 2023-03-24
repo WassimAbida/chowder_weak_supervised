@@ -1,0 +1,17 @@
+version: "2.3"
+services:
+  dev:
+    image: local_image/experiment/chowder_cpu:0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: 
+      - LOG__LEVEL=debug
+    network_mode: host
+    ports:
+      - 6006:6006 # Used for tensorboard
+    volumes:
+      - ./data/:/opt/workspace/data
+      - ./chowder_weak_supervised:/opt/workspace/chowder_weak_supervised
+
+    command: bash
